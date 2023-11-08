@@ -10,13 +10,28 @@ on:
     branches: [ master ]
 
 jobs:
-  
-  Build:
-  
+  secret-detection: 
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
-
+    - name: detect secrets
+      run: |
+          pip install detect-secrets
+          scan_result=$(detect-secrets scan)
+          if echo "$scan_result" | grep -q '"hashed_secret":'; then
+          echo "Secrets were found during the scan:"
+          echo "$scan_result"
+          #exit 1
+          else
+          echo "No secrets were found."
+          fi
+          echo "Current Directory (PWD): $PWD"
+              
+Build:
+  
+   runs-on: self-hosted
+   steps:
+    - uses: actions/checkout@v2
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -44,7 +59,6 @@ jobs:
            min-coverage-overall: 40
            min-coverage-changed-files: 60
      
-
     - name: Run tests
       run: ./gradlew test  
     - name: Archive test reports

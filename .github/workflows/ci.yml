@@ -120,10 +120,9 @@ jobs:
               git add .
               git commit -m "deployment file updated"
               git push origin HEAD:main
-              
+            
             env:
               GIT_PAT: ${{secrets.GIT_PAT}}
-
     #uses: prema6396/privaterepo/.github/workflows/deploy.yml@main
     
      

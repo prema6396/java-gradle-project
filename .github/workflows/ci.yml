@@ -100,8 +100,30 @@ jobs:
       run: docker push graglecont.azurecr.io/${{ secrets.DOCKER_REPO }}:${GITHUB_RUN_NUMBER}
       
  Deploy:
+
+    runs-on: self-hosted
     needs: Build
-    uses: prema6396/privaterepo/.github/workflows/deploy.yml@main
+    steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v2
+            with: 
+              repository: prema6396/Argocd
+              ref: main
+              token: ${{secrets.GIT_PAT}}
+              
+          - name: deploy
+            run: |
+              git config --global user.email "${{secrets.GIT_USER_MAIL}}"
+              git config --global user.name "${{secrets.GIT_USER_NAME}}"       
+              
+              sed -i "s|${{ secrets.NEXUS_REPO }}:.*|${{ secrets.NEXUS_REPO }}:${GITHUB_RUN_NUMBER}|" deployment.yaml
+              git add .
+              git commit -m "deployment file updated"
+              git push origin HEAD:main
+              
+            env:
+              GIT_PAT: ${{secrets.GIT_PAT}}
+    #uses: prema6396/privaterepo/.github/workflows/deploy.yml@main
     
      
 

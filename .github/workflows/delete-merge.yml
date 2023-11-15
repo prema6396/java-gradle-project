@@ -1,0 +1,10 @@
+name: delete-branch
+
+on:  
+  pull_request: 
+    types: closed
+jobs: 
+    branch:
+     uses: .github/workflows/delete-branch.yml@master
+         
+  

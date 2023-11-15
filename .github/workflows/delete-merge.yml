@@ -6,5 +6,6 @@ on:
 jobs: 
     branch:
      uses: ./.github/workflows/delete-branch.yml
+     secrets: inherit
          
   

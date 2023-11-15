@@ -5,6 +5,6 @@ on:
     types: closed
 jobs: 
     branch:
-     uses: .github/workflows/delete-branch.yml@master
+     uses: ./.github/workflows/delete-branch.yml
          
   

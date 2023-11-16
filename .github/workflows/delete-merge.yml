@@ -1,11 +1,11 @@
-name: delete-branch
+# name: delete-branch
 
-on:  
-  pull_request: 
-    types: closed
-jobs: 
-    branch:
-     uses: ./.github/workflows/delete-branch.yml
-     secrets: inherit
+# on:  
+#   pull_request: 
+#     types: closed
+# jobs: 
+#     branch:
+#      uses: ./.github/workflows/delete-branch.yml
+#      secrets: inherit
          
   

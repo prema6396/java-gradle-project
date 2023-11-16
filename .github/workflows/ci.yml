@@ -83,7 +83,7 @@ jobs:
 
         # trivy --severity LOW,MEDIUM mydockerimage > trivy-report.json
          trivy --severity HIGH,CRITICAL mydockerimage > trivy-report.json
-      continue-on-error: true
+
       
     - name: Upload Trivy Report
       uses: actions/upload-artifact@v2

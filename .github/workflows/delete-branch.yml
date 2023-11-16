@@ -1,6 +1,8 @@
 name: delete branch on close pr
 on: 
-  workflow_call:
+  pull_request:
+    branches: master
+    types: closed
   
 jobs:
   delete-branch:
